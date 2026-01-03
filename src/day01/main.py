@@ -14,18 +14,17 @@ def dial(pos, move):
     inc = 0
     while steps > 0:
         if direction == 'L':
-            pos = pos - 1
+            pos -= 1
             if pos == -1:
                 pos = 99
         if direction == 'R':
-            pos = pos + 1
+            pos += 1
             if pos == 100:
                 pos = 0
-        steps = steps - 1
+        steps -= 1
         if pos == 0:
             inc += 1
     return pos, inc
-
 
 for move in sequence:
     end_position, inc = dial(start_position, move)
