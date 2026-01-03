@@ -1,7 +1,8 @@
 path = './input_data.txt'
 sequence = []  
 start_position = 50
-password = 0
+result1 = 0
+result2 = 0
 
 with open(path, 'r') as file:
     for line in file:
@@ -10,10 +11,10 @@ with open(path, 'r') as file:
 def dial(pos, move):
     direction = move[0]
     steps = int(move[1:])
-    #print(pos, move, direction, steps)
+    inc = 0
     while steps > 0:
         if direction == 'L':
-            pos = pos -1
+            pos = pos - 1
             if pos == -1:
                 pos = 99
         if direction == 'R':
@@ -21,17 +22,17 @@ def dial(pos, move):
             if pos == 100:
                 pos = 0
         steps = steps - 1
-        #print (pos, direction, steps)
-    return(pos)
-
-
+        if pos == 0:
+            inc += 1
+    return pos, inc
 
 
 for move in sequence:
-    end_position = dial(start_position, move)
+    end_position, inc = dial(start_position, move)
     if end_position == 0:
-        password = password + 1
+        result1 += 1
+    result2 += inc
     start_position = end_position
-    #print('Final position: ' + str(end_position))
 
-print('The password is: ' + str(password))
+print('The password for part 1 is: ' + str(result1))
+print('The password for part 2 is: ' + str(result2))
